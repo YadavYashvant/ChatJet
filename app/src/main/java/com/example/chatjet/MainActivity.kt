@@ -1,28 +1,24 @@
-package com.example.chatjet
+package com.example.composechat
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.chatjet.ui.theme.ChatJetTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.chatjet.MessageScreen
+import com.example.composechat.ui.theme.ComposeChatTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChatJetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+            ComposeChatTheme {
+                Surface(color = MaterialTheme.colors.background) {
+                    ChatApp()
                 }
             }
         }
@@ -30,17 +26,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ChatJetTheme {
-        Greeting("Android")
+fun ChatApp() {
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = "channellist") {
+        composable("channellist") {
+            ChannelListScreen(navController = navController)
+        }
+        composable("messagelist/{cid}") { backStackEntry ->
+            MessageScreen(
+                navController = navController,
+                cid = backStackEntry.arguments?.getString("cid")!!
+            )
+        }
     }
 }
