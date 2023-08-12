@@ -10,13 +10,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chatjet.MessageScreen
-import com.example.composechat.ui.theme.ComposeChatTheme
+import com.example.chatjet.ui.theme.ChatJetTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeChatTheme {
+            ChatJetTheme{
                 Surface(color = MaterialTheme.colors.background) {
                     ChatApp()
                 }

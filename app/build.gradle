@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-// Stream Chat UI Components
+    // Stream Chat UI Components
     implementation "io.getstream:stream-chat-android-ui-components:4.8.1"
 
     // Google / Jetpack dependencies
