@@ -1,2 +1,2 @@
 # ChatJet
-Making a chatting app in Jetpack Compose.
+Making a chatting app in Jetpack Compose, with simple UI.
